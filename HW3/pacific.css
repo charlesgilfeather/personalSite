@@ -1,0 +1,154 @@
+/*
+ File: /~cgilfeat/HW3/index.html
+ 91.61 GUI Programming I Assignment 3:
+   Purpose: Stylize a page using only CSS in order to have it match the teachers specifications
+ Charles K Gilfeather, UMass Lowell Computer Science
+ Charles_Gilfeather@student.uml.edu
+ Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ updated by CKG on 9/29/2018 at 10:34 PM
+*/
+
+
+header, hgroup, nav, figure, figcaption, aside, section, article {
+	display: block;
+}
+
+/* content - changes the white box of information */
+#content{
+	position: static;
+	background-color: white;
+	/* adjusted the padding and margins so its within 80% */
+	padding-left: 2%;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 5px;
+	height: 80%;
+	/* set minimum width value */
+	min-width: 600px;
+}
+
+/* resort - changes specific text boldness/color */
+.resort{
+	font-weight: bold;
+	color: #3399CC;
+}
+
+/* nav - affects blue side box */
+nav{
+	/* set relative positioning and force to left of info */
+	position: relative;
+	float: left;
+	/* adjust margins and height */
+	margin-left: 10%;
+	width: 180px;
+	height: 85%;
+	padding: 10px;
+	background-color: #add8e6;
+}
+
+/* wrapper - applies 100% height for others to base off of */
+#wrapper{
+	height: 100%;
+	margin-bottom: 0;
+
+}
+
+body {
+	height:100%;
+	/* change background color */
+	background-color: #00569f;
+	color: #666666;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url("ptrbackground.jpg");
+}
+
+nav ul {
+	font-size: 1.2em;
+}
+nav a:visited {
+	color: #344873;
+}
+nav a:hover {
+	color: #FFFFFF;
+}
+
+/* h1 - changes header image bar */
+h1 {
+	/* align text and change positioning */
+	text-align: center;
+	background-position: right;
+	/* 80% margins */
+	margin-left: 10%;
+	margin-right: 10%;
+	/* min width */
+	min-width: 600px;
+	/* insert image */
+	background-image: url("sunset.jpg");
+	background-size:100%;
+	color:white;
+}
+
+/* ul - changes stylization of the unordered list in nav */
+#wrapper > nav > ul{
+	padding: 0px;
+	list-style: none;
+	text-decoration: none;
+}
+
+/* a - changes specifically the url links in nav */
+#wrapper nav a{
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+
+/* ul - change the marker of the unordered list to the specified image */
+#content ul {
+	list-style-position: inside;
+	list-style-image: url("marker.gif");
+}
+
+/* change padding/color of h2 */
+h2 {
+	color: #3399CC;
+	padding-left: 225px;
+}
+
+h1,
+h2 {
+	margin-bottom: 0;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+/* change padding and positioning of the image */
+img{
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-right: 20px;
+	float:left;
+}
+
+#contact {
+	font-size: 90%;
+}
+dt {
+	color: #000033;
+}
+
+/* footer - adjust settings of footer to align with bottom of #content */
+footer {
+	background-color: white;
+	margin-right: 10%;
+	margin-left: 10%;
+	height: 5%;
+	min-width: 600px;
+	font-family: Georgia, "Times New Roman", serif;
+	font-style: italic;
+	padding:5px;
+}
+
+/* html - set overall height of the html page to 100% */
+html{
+	height: 100%;
+}
