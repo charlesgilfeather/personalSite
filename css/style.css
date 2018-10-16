@@ -1,0 +1,99 @@
+/*
+ File: /~cgilfeat/style.css
+ 91.61 GUI Programming I Assignment 4:
+   Purpose: Re-stylize my home page using externall css
+ Charles K Gilfeather, UMass Lowell Computer Science
+ Charles_Gilfeather@student.uml.edu
+ Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ updated by CKG on 10/10/2018 at 9:09 PM
+*/
+
+/* h1: adjusts the first header on my page, introducing the user */
+h1{
+	text-align: center;
+	/* set a border */
+	border-style: groove;
+	border-radius: 5px;
+	border-width: 5px;
+	font-family: "Arial Black", Gadget, sans-serif;
+	/* margin it further in from the other information below it */
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+/* info: the first information box*/
+#info{
+	background-color: #606060;
+	/* margins and width to size, push left */
+	margin-left: 10%;
+	width: 40%;
+	float: left;
+	/* set border */
+	border-style: groove;
+	border-radius: 5px;
+	/* pad and set a default height*/
+	padding: 1%;
+	height: 400px;
+	color: white;
+}
+
+/* index: second box of information */
+#index{
+	background-color: #505050;
+	/* set margins so it aligns next to first box */
+	margin-left: 52%;
+	/* match first box in style */
+	width: 40%;
+	border-style: groove;
+	border-radius: 5px;
+	padding: 1%;
+	height: 400px;
+	color: white;
+}
+
+/* set background color of entire body */
+body{
+	background-color: #d3d3d3;
+}
+
+/* position list of interests */
+#info > ul{
+	padding: 0px;
+	padding-left: 30px;
+}
+
+/* set hyperlink color */
+#info > ul > li > a{
+	color: blue;
+}
+
+/* hover settings */
+#info > ul > li > a:hover{
+	color: red;
+}
+
+/* hyperlink */
+#index > ul > li > a{
+	color: blue;
+}
+
+/* hover */
+#index > ul > li > a:hover{
+	color: red;
+}
+
+/* capitalize headers */
+#info > h2{
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+#index > h2{
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+/* center the footer */
+footer{
+	text-align: center;
+}
