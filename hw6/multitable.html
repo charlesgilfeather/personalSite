@@ -1,0 +1,48 @@
+<!--
+ File: multitable.html
+ 91.61 GUI Programming I Assignment 6:
+   Purpose: Create a dynamic multiplication table with user input using javascript
+ Charles K Gilfeather, UMass Lowell Computer Science
+ Charles_Gilfeather@student.uml.edu
+ Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ updated by CKG on 11/15/2018 at 8:17 PM
+-->
+
+<!DOCTYPE html>
+<html>
+  <!--Link the css styling sheet -->
+  <head>
+    <link rel="stylesheet" href="css/c.css" />
+  </head>
+  <body>
+    <!--Setup a div for inputting data -->
+    <div id = "input_area">
+      <!--Headers -->
+      <h2>Multiplication Table Creator</h2>
+      <p>Please Enter Bounding Horizontal (x) values (NOTE: order doesn't matter):</p>
+
+      <!--Setup input areas and error message placement -->
+      <input id="x1">
+      <input id="x2">
+      <p id="x_errors"></p>
+
+      <!--Repeat with y values -->
+      <p>Please Enter Bounding Vertical (y) values (NOTE: order doesn't matter):</p>
+      <input id="y1">
+      <input id="y2">
+      <p id="y_errors"></p>
+      <p></p>
+
+      <!--Button that runs js function -->
+      <button type="button" onclick="myFunction()">Submit</button>
+    </div>
+
+    <!--Setup graph area -->
+    <div id = "graph">
+      <p id="demo"></p>
+    </div>
+
+    <!--Link js file -->
+    <script src="js/javascript.js"></script>
+  </body>
+</html>
