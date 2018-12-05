@@ -1,0 +1,256 @@
+<!--
+ File: multitable.html
+ 91.61 GUI Programming I Assignment 8:
+   Purpose: Update table program using jquery
+ Charles K Gilfeather, UMass Lowell Computer Science
+ Charles_Gilfeather@student.uml.edu
+ Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ updated by CKG on 12/4/2018 at 11:30 PM
+-->
+
+<!DOCTYPE html>
+<html>
+  <!--Link the css styling sheet -->
+  <head>
+    <link rel="stylesheet" href="css/c.css" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+  </head>
+  <body>
+    <div id="myTabs">
+      <ul>
+        <li><a href="#input_area">Data Entry</a></li>
+        <li><a href="#removeStuff">Remove Tabs</a></li>
+      </ul>
+
+
+    <!--Setup a div for inputting data -->
+    <div id = "input_area">
+      <!--Header -->
+      <h2>Multiplication Table Creator</h2>
+
+      <!--Set up form -->
+      <form id="commentForm">
+        <fieldset>
+          <!--Header -->
+          <legend>Please Enter Your X and Y Ranges (Range = [-12,12])</legend>
+          <!--Recieve x1 data, set parameters -->
+          <p>
+            <label for="x1">Please Enter First X Value</label>
+            <input id="x1" type="number" range=[-12,12] value=0>
+          </p>
+          <div id="slider1"></div>
+          <!--Recieve x2 data -->
+          <p>
+            <label for="x2">Please Enter Second X Value</label>
+            <input id="x2" type="number" range=[-12,12] value=0>
+          </p>
+          <div id="slider2"></div>
+          <!--Recieve y data -->
+          <p>
+            <label for="y1">Please Enter First Y Value</label>
+            <input id="y1" type="number" range=[-12,12] value=0>
+          </p>
+          <div id="slider3"></div>
+          <p>
+            <label for="y2">Please Enter Second Y Value</label>
+            <input id="y2" type="number" range=[-12,12] value=0>
+          </p>
+          <div id="slider4"></div>
+        </fieldset>
+      </form>
+    </div>
+
+    <!--Remove tab -->
+    <div id = "removeStuff">
+      <!--Headers -->
+      <p>NOTE: Tab Indexes start at 1 (meaning the first user-created tab)</p>
+      <label for="indexValue">Index of Tab to Remove:</label>
+      <input id="indexValue" type="number">
+      <p><input id = "removeTabs" type="button" value="Remove"></p>
+      <label for="indexValue2">or, Range of Tabs Indexes to Delete</label>
+      <input id="indexValue2" type="number">
+      <input id="indexValue3" type="number">
+      <p><input id = "removeTabs2" type="button" value="Remove Range"></p>
+    </div>
+
+    <div id = "graph">
+      <p id="demo"></p>
+    </div>
+    <!--Setup graph area -->
+
+    </div>
+
+    <!--Link js file -->
+    <script src="js/javascript.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery-ui-git.js"></script>
+    <script src="js/jquery-ui-min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+
+    <!--script -->
+    <script>
+      // validation
+      $( "#commentForm" ).validate({
+        errorElement: 'div',
+      });
+      $( function() {
+        // slider 1 function for x1
+        $( "#slider1" ).slider({
+          // setup
+          value:0,
+          min: -12,
+          max: 12,
+          step: 1,
+          slide: function( event, ui ) {
+            // run function and name tab
+            $( "#x1" ).val( ui.value );
+            var valX1 = parseInt($("#x1").val(), 10);
+            var valX2 = parseInt($("#x2").val(), 10);
+            var valY1 = parseInt($("#y1").val(), 10);
+            var valY2 = parseInt($("#y2").val(), 10);
+            $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+            $("#myTabs").tabs("refresh");
+            myFunction();
+          }
+
+        });
+        // slider 2 function for x2
+        $( "#slider2" ).slider({
+          // same setup and functionality as above
+          value:0,
+          min: -12,
+          max: 12,
+          step: 1,
+          slide: function( event, ui ) {
+            $( "#x2" ).val( ui.value );
+            var valX1 = parseInt($("#x1").val(), 10);
+            var valX2 = parseInt($("#x2").val(), 10);
+            var valY1 = parseInt($("#y1").val(), 10);
+            var valY2 = parseInt($("#y2").val(), 10);
+            $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+            $("#myTabs").tabs("refresh");
+            myFunction();
+          }
+        });
+        // slider 3 function for y1
+        $( "#slider3" ).slider({
+          value:0,
+          min: -12,
+          max: 12,
+          step: 1,
+          slide: function( event, ui ) {
+            $( "#y1" ).val( ui.value );
+            var valX1 = parseInt($("#x1").val(), 10);
+            var valX2 = parseInt($("#x2").val(), 10);
+            var valY1 = parseInt($("#y1").val(), 10);
+            var valY2 = parseInt($("#y2").val(), 10);
+            $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+            $("#myTabs").tabs("refresh");
+            myFunction();
+          }
+        });
+        // slider 4 function for y2
+        $( "#slider4" ).slider({
+          value:0,
+          min: -12,
+          max: 12,
+          step: 1,
+          slide: function( event, ui ) {
+            $( "#y2" ).val( ui.value );
+            var valX1 = parseInt($("#x1").val(), 10);
+            var valX2 = parseInt($("#x2").val(), 10);
+            var valY1 = parseInt($("#y1").val(), 10);
+            var valY2 = parseInt($("#y2").val(), 10);
+            $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+            $("#myTabs").tabs("refresh");
+            myFunction();
+          }
+        });
+        // x1 function for parsing text box adjustments
+        $("#x1").change(function() {
+          // same functionality as above
+          $("#slider1").slider("value", $(this).val());
+          var valX1 = parseInt($("#x1").val(), 10);
+          var valX2 = parseInt($("#x2").val(), 10);
+          var valY1 = parseInt($("#y1").val(), 10);
+          var valY2 = parseInt($("#y2").val(), 10);
+          $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+          $("#myTabs").tabs("refresh");
+          myFunction();
+        });
+        // x2 function for parsing text box adjustments
+        $("#x2").change(function() {
+          $("#slider2").slider("value", $(this).val());
+          var valX1 = parseInt($("#x1").val(), 10);
+          var valX2 = parseInt($("#x2").val(), 10);
+          var valY1 = parseInt($("#y1").val(), 10);
+          var valY2 = parseInt($("#y2").val(), 10);
+          $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+          $("#myTabs").tabs("refresh");
+          myFunction();
+        });
+        // y1 function for parsing text box adjustments
+        $("#y1").change(function() {
+          $("#slider3").slider("value", $(this).val());
+          var valX1 = parseInt($("#x1").val(), 10);
+          var valX2 = parseInt($("#x2").val(), 10);
+          var valY1 = parseInt($("#y1").val(), 10);
+          var valY2 = parseInt($("#y2").val(), 10);
+          $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+          $("#myTabs").tabs("refresh");
+          myFunction();
+        });
+        // y2 function for parsing text box adjustments
+        $("#y2").change(function() {
+          $("#slider4").slider("value", $(this).val());
+          var valX1 = parseInt($("#x1").val(), 10);
+          var valX2 = parseInt($("#x2").val(), 10);
+          var valY1 = parseInt($("#y1").val(), 10);
+          var valY2 = parseInt($("#y2").val(), 10);
+          $("<li><a href='#graph'>("+valX1+", "+valX2+") ("+valY1+", "+valY2+")</a></li>").appendTo("#myTabs .ui-tabs-nav");
+          $("#myTabs").tabs("refresh");
+          myFunction();
+        });
+
+        // call tabs
+        $("#myTabs").tabs();
+        // call the first remove tabs button press
+        $("#removeTabs").click(function() {
+          // get index and delete respective value
+          var tabIndex = parseInt($("#indexValue").val(), 10);
+          tabIndex = tabIndex + 1;
+          if(tabIndex > 1){
+            var tab = $( "#myTabs" ).find(".ui-tabs-nav li:eq(" + tabIndex + ")").remove();
+          }
+          $("#myTabs").tabs("refresh");
+        });
+        // call for second remove tabs button press (range)
+        $("#removeTabs2").click(function() {
+          // get two values and then loop through and delete accordingly
+          var tabIndex = parseInt($("#indexValue2").val(), 10);
+          var tabIndex2 = parseInt($("#indexValue3").val(), 10);
+          var counter;
+          if(tabIndex2>tabIndex){
+            var temp = tabIndex2;
+            tabIndex2 = tabIndex;
+            tabIndex = temp;
+          }
+          tabIndex = tabIndex + 1;
+          tabIndex2 = tabIndex2 + 1;
+          counter = tabIndex2;
+          // conditionals and loop
+          if(tabIndex > 1){
+            if(tabIndex2 > 1){
+              while(counter <= tabIndex){
+                var tab = $( "#myTabs" ).find(".ui-tabs-nav li:eq(" + tabIndex2 + ")").remove();
+                counter++;
+              }
+            }
+          }
+          // refresh
+          $("#myTabs").tabs("refresh");
+        });
+      });
+    </script>
+  </body>
+</html>
