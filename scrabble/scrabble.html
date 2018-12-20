@@ -1,0 +1,357 @@
+<!--
+File: scrabble.html
+91.61 GUI Programming I Assignment 9:
+  Purpose: Main html file containing my Scrabble assignment
+Charles K Gilfeather, UMass Lowell Computer Science
+Charles_Gilfeather@student.uml.edu
+Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+updated by CKG on 12/19/2018 at 10:42 PM
+-->
+
+<!-- basic setup -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- set a title -->
+  <title>Scrabble!</title>
+  <!-- bring in files I will be using -->
+  <link rel="stylesheet" href="css/styling.css" />
+  <link rel="stylesheet" href="js/jquery-ui.js">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="js/jquery-1.12.4.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/javascript.js"></script>
+
+  <!-- begin jquery scripts -->
+  <script>
+  // quick script to run these functions as soon as we load
+  window.onload = function() {
+    myFunction();
+    myFunction2();
+  };
+  // jquery script
+  $( function() {
+    // global variables, mostly for tracking multipliers
+    var sum = 0;
+    var sum2 = 0;
+    var obj;
+    var isTripleWord = 0;
+    var isDoubleWord = 0;
+    var reset = 0;
+    // if rule button is pressed, give a helpful alert
+    $("#rulebtn").click(function(){
+      alert("Using the 7 pieces given to you, construct words on the board! \nYou can use the bonus blocks to up your score even more! \nOnce you've constructed a word, just hit submit and you'll be given your score and a new set of blocks. \nPlay as much as you want, and try and get as high of a total score as possible! \nYou can also change the board whenever you so choose!");
+    });
+    // if the user submits a word
+    $("#newLetters").click(function(){
+      // reset the positioning of the letters
+      $("#letter1").css({top: 0, left: 0});
+      $("#letter2").css({top: 0, left: 0});
+      $("#letter3").css({top: 0, left: 0});
+      $("#letter4").css({top: 0, left: 0});
+      $("#letter5").css({top: 0, left: 0});
+      $("#letter6").css({top: 0, left: 0});
+      $("#letter7").css({top: 0, left: 0});
+      // add word multipliers if neccissary
+      if(isTripleWord == 1){
+        sum *= 3;
+      }
+      if(isDoubleWord == 1){
+        sum *= 2;
+      }
+      // alert the score and add to total
+      alert("Your score for this round is: " + sum);
+      sum2 += sum;
+      $("#scoreboard_overall").text(sum2);
+      // reset variables
+      isTripleWord = 0;
+      isDoubleWord = 0;
+      sum = 0;
+      $("#scoreboard").text(sum);
+      // call for new letters
+      newLetters();
+    });
+    // if any of the letters are dragged
+    $( "#letter1,#letter2,#letter3,#letter4,#letter5,#letter6,#letter7" ).draggable({
+      // have them snap to any of the elements
+      snap: "#element1,#element2,#element3,#element4,#element5,#element6,#element7,#element8,#element9,#element10,#element11,#element12,#element13,#element14,#element15"
+    });
+    // droppable sections for the elements
+    $( "#element1,#element2,#element3,#element4,#element5,#element6,#element7,#element8,#element9,#element10,#element11,#element12,#element13,#element14,#element15" ).droppable({
+      // if dragging a letter over a function
+      over: function( event, ui ) {
+        // set variables
+        var letterMult = 1;
+        var tmp;
+        // get which letter is being dragged and over which element
+        var fileName = ui.draggable.attr("id");
+        var source = $(this).find('img').attr('src');
+        // add multipliers if neccissary
+        if(source == "img/Scrabble_Space_Double_Letter.jpg"){
+          letterMult = 2;
+        }
+        if(source == "img/Scrabble_Space_Triple_Letter.jpg"){
+          letterMult = 3;
+        }
+        if(source == "img/Scrabble_Space_Double_Word.jpg"){
+          isDoubleWord = 1;
+        }
+        if(source == "img/Scrabble_Space_Triple_Word.jpg"){
+          isTripleWord = 1;
+        }
+        // these next ifs check to see which letter it is (number wise)
+        if(fileName == "letter1"){
+          // it then gets the json storage value of that letter
+          var text = localStorage.getItem("letval1");
+          obj = JSON.parse(text);
+          // add that to a temporary value
+          tmp = obj.val;
+          tmp *= letterMult;
+          // add to sum
+          sum += tmp;
+          tmp = sum;
+          // check for multipliers
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          // print out to scoreboard
+          $("#scoreboard").text(tmp);
+        }
+        // repeat this process for the other letters
+        else if(fileName == "letter2"){
+          var text = localStorage.getItem("letval2");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter3"){
+          var text = localStorage.getItem("letval3");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter4"){
+          var text = localStorage.getItem("letval4");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter5"){
+          var text = localStorage.getItem("letval5");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter6"){
+          var text = localStorage.getItem("letval6");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+        else{
+          var text = localStorage.getItem("letval7");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum += tmp;
+          tmp = sum;
+          if(isTripleWord == 1){
+            tmp *= 3;
+          }
+          if(isDoubleWord == 1){
+            tmp *= 2;
+          }
+          $("#scoreboard").text(tmp);
+        }
+      },
+      // check for when we move a letter outside of an element
+      out: function(event,ui){
+        // set letterMult to one and define tmp
+        var letterMult = 1;
+        var tmp;
+        // do the same as we did above and get the values of the letter being used and the element being hovered over
+        var fileName = ui.draggable.attr("id");
+        var source = $(this).find('img').attr('src');
+        // multipliers if neccissary
+        if(source == "img/Scrabble_Space_Double_Letter.jpg"){
+          letterMult = 2;
+        }
+        if(source == "img/Scrabble_Space_Triple_Letter.jpg"){
+          letterMult = 3;
+        }
+        if(source == "img/Scrabble_Space_Double_Word.jpg"){
+          isDoubleWord = 0;
+        }
+        if(source == "img/Scrabble_Space_Triple_Word.jpg"){
+          isTripleWord = 0;
+        }
+        // do the same as we did before with the if statements, but this time subtract from sum since we are leaving it
+        if(fileName == "letter1"){
+          var text = localStorage.getItem("letval1");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter2"){
+          var text = localStorage.getItem("letval2");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter3"){
+          var text = localStorage.getItem("letval3");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter4"){
+          var text = localStorage.getItem("letval4");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter5"){
+          var text = localStorage.getItem("letval5");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else if(fileName == "letter6"){
+          var text = localStorage.getItem("letval6");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+        else{
+          var text = localStorage.getItem("letval7");
+          obj = JSON.parse(text);
+          tmp = obj.val;
+          tmp *= letterMult;
+          sum -= tmp;
+          tmp = sum;
+          $("#scoreboard").text(tmp);
+        }
+      }
+    });
+  });
+  </script>
+</head>
+  <body>
+    <!-- simple header -->
+    <h1>Let's Play Scrabble!</h1>
+    <!-- section to display our scores -->
+    <div id = "scoresection">
+      <span><b>This Round's Score: </b></span>
+      <span id="scoreboard">0</span>
+      <span><b>&nbsp&nbspOverall Score: </b></span>
+      <span id="scoreboard_overall">0</span>
+    </div>
+    <br style="clear:both">
+    <!-- snaptarget area, which holds child spans which each contain an element that makes up the board -->
+    <div id="snaptarget" class="ui-widget-header">
+      <span id="element1"></span>
+      <span id="element2">&nbsp&nbsp&nbsp</span>
+      <span id="element3">&nbsp&nbsp&nbsp</span>
+      <span id="element4">&nbsp&nbsp&nbsp</span>
+      <span id="element5">&nbsp&nbsp&nbsp</span>
+      <span id="element6">&nbsp&nbsp&nbsp</span>
+      <span id="element7">&nbsp&nbsp&nbsp</span>
+      <span id="element8">&nbsp&nbsp&nbsp</span>
+      <span id="element9">&nbsp&nbsp&nbsp</span>
+      <span id="element10">&nbsp&nbsp&nbsp</span>
+      <span id="element11">&nbsp&nbsp&nbsp</span>
+      <span id="element12">&nbsp&nbsp&nbsp</span>
+      <span id="element13">&nbsp&nbsp&nbsp</span>
+      <span id="element14">&nbsp&nbsp&nbsp</span>
+      <span id="element15">&nbsp&nbsp&nbsp</span>
+    </div>
+    <br style="clear:both">
+    <!-- lettertable functions similar to snaptarget except it holds the letters -->
+    <div id="lettertable" class="ui-letter-table">
+      <span id="letter1"></span>
+      <span id="letter2"></span>
+      <span id="letter3"></span>
+      <span id="letter4"></span>
+      <span id="letter5"></span>
+      <span id="letter6"></span>
+      <span id="letter7"></span>
+    </div>
+    <br style="clear:both">
+    <!-- a place where we can hold all of our buttons -->
+    <div id = "buttonholder">
+      <button id = "newLetters">Submit Word</button>
+      <button id = "begoneboard" onclick="removeBoard()">Try a New Board</button>
+      <br style="clear:both">
+      <br style="clear:both">
+      <button id = "rulebtn">Click Me for Rules, Tips, and Tricks!</button>
+    </div>
+  </body>
+</html>

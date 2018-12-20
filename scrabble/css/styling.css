@@ -1,0 +1,77 @@
+/*
+ File: css/styling.css
+ 91.61 GUI Programming I Assignment 9:
+   Purpose: Partner css file for styling purposes
+ Charles K Gilfeather, UMass Lowell Computer Science
+ Charles_Gilfeather@student.uml.edu
+ Copyright (c) 2018 by Charles K Gilfeather. All Rights Reserved. May be freely copied or excerpted for educational purposes with credit to the author.
+ updated by CKG on 12/19/2018 at 10:42 PM
+*/
+
+/* this will adjust the dimentions of all of the tiles*/
+.draggable {
+  width: 90px;
+  height: 185px;
+  padding: 5px;
+  float: left;
+  margin: 0 10px 10px 0;
+  font-size: .9em;
+  background-color: brown;
+}
+
+/* anything within the widget headers or content are set to black*/
+.ui-widget-header p, .ui-widget-content p {
+  margin: 0;
+  color: black;
+}
+
+/* the target zone has a set height and location*/
+#snaptarget {
+  height: 185px;
+  text-align: center;
+  padding: 5px;
+}
+
+/* sets up the letter table area with an image and centering*/
+#lettertable{
+  position:relative;
+  background-image: url('../img/holder.png');
+  background-repeat: round;
+  width: 50%;
+  margin-left: 25%;
+  text-align: center;
+}
+
+/* adjusts the score keeping area*/
+#scoresection{
+  text-align: center;
+  font-size: 16pt;
+}
+
+/* my header*/
+h1{
+  text-align: center;
+  color: brown;
+}
+
+/* centers the buttons*/
+#newLetters, #buttonholder{
+  text-align: center;
+}
+
+/* more button adjustment*/
+#newLetters, #begoneboard{
+  width: 150px;
+  height: 50px;
+  color: red;
+}
+
+/* rule button adjustment*/
+#rulebtn{
+  height: 50px;
+}
+
+/* sets the background color of the body*/
+body{
+  background-color: #f5f5dc;
+}
